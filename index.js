@@ -1,7 +1,12 @@
 $(() => {
   console.log('index.js loading ')
   loadImages()
-  // masonize()
+
+  $('.grid').masonry({
+    itemSelector: '.grid-item',
+    columnWidth: 160,
+    horizontalOrder: true
+  });
 })
 
 const loadImages = () => {
@@ -10,23 +15,15 @@ const loadImages = () => {
     url: folder,
     dataType: 'json',
     success: function (data) {
-      data.forEach((img) => {
+      data.forEach(img => {
 
         $("body").append(`
-          <div>
-            <img src="${folder}${img}" class="grid-item grid-item--width2">
+          <div class="grid-item grid-item--width2 grid-item--height2">
+          <img src="${folder}${img}">
           </div>    
-        `)
+          `)
       })
     }
   })
-}
 
-function masonize() {
-  let elem = document.querySelector('.grid');
-  let msnry = new Masonry(elem, {
-    // options
-    itemSelector: '.grid-item',
-    columnWidth: 200
-  })
 }
