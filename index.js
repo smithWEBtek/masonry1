@@ -1,34 +1,32 @@
 $(() => {
-  console.log('index.js loaded ... ')
-
-  getImages()
-
+  console.log('index.js loading ')
+  loadImages()
+  // masonize()
 })
 
-
-const getImages = () => {
-
+const loadImages = () => {
   let folder = "images/";
-
   $.ajax({
     url: folder,
     dataType: 'json',
     success: function (data) {
-      data.forEach((pic) => {
+      data.forEach((img) => {
+
         $("body").append(`
-        
-        <div class="element">
-          <img src="${folder}${pic}">
-        </div>    
+          <div>
+            <img src="${folder}${img}" class="grid-item grid-item--width2">
+          </div>    
         `)
       })
-
-
-      // let img = new Image();
-      // img.src = src;
-      // containerElement.appendChild(img);
-
-
     }
+  })
+}
+
+function masonize() {
+  let elem = document.querySelector('.grid');
+  let msnry = new Masonry(elem, {
+    // options
+    itemSelector: '.grid-item',
+    columnWidth: 200
   })
 }
